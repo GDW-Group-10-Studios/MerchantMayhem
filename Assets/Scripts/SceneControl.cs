@@ -9,6 +9,12 @@ public class SceneControl : MonoBehaviour
     public GameObject main;
     public GameObject endOfDay;
 
+    public void Start()
+    {
+        main.SetActive(true);
+        endOfDay.SetActive(false);
+    }
+
     public void DayEnd()
     {
         main.SetActive(false);
