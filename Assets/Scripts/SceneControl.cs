@@ -6,28 +6,19 @@ using UnityEngine.SceneManagement;
 
 public class SceneControl : MonoBehaviour
 {
-
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    public GameObject main;
+    public GameObject endOfDay;
 
     public void DayEnd()
     {
-        SceneManager.LoadScene("DayEnd");
+        main.SetActive(false);
+        endOfDay.SetActive(true);
     }
 
     public void DayContinue()
     {
-        SceneManager.LoadScene("MainScene");
+        main.SetActive(true);
+        endOfDay.SetActive(false);
     }
 
 }

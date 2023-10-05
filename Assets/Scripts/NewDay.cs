@@ -1,10 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class NewDay : MonoBehaviour
 {
-    
+    public GameObject DayText;
 
     public int day = 0;
     public float customers = 0f;
@@ -20,6 +21,7 @@ public class NewDay : MonoBehaviour
         {
             // increase day and get amount of customers
             day ++;
+            
             customers = Random.Range(3f, 6f);
             
             // Check for rain if yes divide customers by 2 if odd add 0.5
