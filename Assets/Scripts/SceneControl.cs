@@ -11,8 +11,8 @@ public class SceneControl : MonoBehaviour
 
     public void Start()
     {
-        main.SetActive(true);
-        endOfDay.SetActive(false);
+        main.SetActive(false);
+        endOfDay.SetActive(true);
     }
 
     public void DayEnd()

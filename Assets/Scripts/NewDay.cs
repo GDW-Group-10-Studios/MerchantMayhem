@@ -7,6 +7,7 @@ using UnityEngine;
 public class NewDay : MonoBehaviour
 {
     [SerializeField] TMP_Text dayText;
+    [SerializeField] TMP_Text dayTextMain;
 
     [SerializeField] GameObject CloudCardObj;
     [SerializeField] GameObject SunCardObj;
@@ -21,6 +22,11 @@ public class NewDay : MonoBehaviour
     public bool raining = false;
     public int lastEvent = 0;
 
+    private void Start()
+    {
+        StartDay();
+    }
+
 
     public void StartDay()
     {
@@ -34,6 +40,7 @@ public class NewDay : MonoBehaviour
             // increase day and get amount of customers
             day ++;
             dayText.text = ("Day "+ day.ToString());
+            dayTextMain.text = ("Day " + day.ToString());
 
             customers = Random.Range(3f, 6f);
             
@@ -50,27 +57,24 @@ public class NewDay : MonoBehaviour
                 }
 
                 RainCard();
+                BlankEventCard();
                 raining = RainCheck();
             }
             else
             {
+                // if not raining
 
+                // Check for caravan
                 if (EventCheck() && lastEvent >= 3)
                 {
                     lastEvent = 0;
-                    if (customers % 2 == 0)
-                    {
-                        customers = customers / 2;
-                    }
-                    else
-                    {
-                        customers = customers / 2 + 0.5f;
-                    }
-
+                    customers = customers * 2;
+                    CaravanCard();
                 }
                 else
                 {
                     lastEvent++;
+                    NoEventCard();
                 }
 
 
@@ -107,7 +111,7 @@ public class NewDay : MonoBehaviour
     private bool EventCheck()
     // returns bool value with 25% chance of being true for the rain system
     {
-        int RandNum = Random.Range(1, 10);
+        int RandNum = Random.Range(1, 5);
         if (RandNum == 1)
         {
             return true;
