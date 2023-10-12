@@ -185,7 +185,6 @@ public class TradeScript : MonoBehaviour
     {
         if (selectedOp == 1)
         {
-            Debug.Log("OP 1  " + tradeOp2Scaled.ToString());
             if (Values[tradeOp1Scaled] >= tradeOp1Price)
             {
                 Op1Button.interactable = false;
@@ -204,7 +203,6 @@ public class TradeScript : MonoBehaviour
         }
         else if (selectedOp == 2)
         {
-            Debug.Log("OP 2  " + tradeOp1Scaled.ToString());
             if (Values[tradeOp2Scaled] >= tradeOp2Price)
             {
                 Op2Button.interactable = false;
