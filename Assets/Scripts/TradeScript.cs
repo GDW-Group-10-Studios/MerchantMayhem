@@ -51,9 +51,9 @@ public class TradeScript : MonoBehaviour
 
     public void increase()
     {
-        foreach (int item in Values)
+        for (int i = 0; i < Values.Length; i++)
         {
-            Values[item] += 5;
+            Values[i] += 1;
         }
         ValuesInit();
     }

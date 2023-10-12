@@ -2390,31 +2390,31 @@ MonoBehaviour:
   Op1Button: {fileID: 518508327}
   Op2Button: {fileID: 1419033239}
   regularTradesOp1Left:
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 700707192}
+  - {fileID: 700707192}
   - {fileID: 1767546429}
   - {fileID: 1767546429}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 14535307}
+  - {fileID: 14535307}
   - {fileID: 1595486086}
   - {fileID: 1595486086}
   - {fileID: 89849648}
   - {fileID: 315046740}
   - {fileID: 2123136134}
-  - {fileID: 0}
+  - {fileID: 1441507899}
   regularTradesOp2Left:
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 2057643155}
+  - {fileID: 2057643155}
   - {fileID: 518811607}
   - {fileID: 518811607}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 139738228}
+  - {fileID: 139738228}
   - {fileID: 107988356}
   - {fileID: 107988356}
   - {fileID: 18251007}
   - {fileID: 1300536891}
   - {fileID: 2074171892}
-  - {fileID: 0}
+  - {fileID: 145471764}
   regularTradesOp1Right:
   - {fileID: 2045631712}
   regularTradesOp2Right:
@@ -2424,24 +2424,24 @@ MonoBehaviour:
   BLNum: {fileID: 725112391}
   BRNum: {fileID: 790266614}
   selectedTradeTop:
-  - {fileID: 0}
+  - {fileID: 65372316}
   - {fileID: 1032381464}
-  - {fileID: 0}
+  - {fileID: 1938825847}
   - {fileID: 1870985300}
   - {fileID: 711654953}
   - {fileID: 1179455343}
   - {fileID: 113203948}
   - {fileID: 0}
-  - {fileID: 1050303037}
+  - {fileID: 950471438}
   selectedTradeBottom:
-  - {fileID: 0}
+  - {fileID: 581250072}
   - {fileID: 1087247997}
-  - {fileID: 0}
+  - {fileID: 365738272}
   - {fileID: 1227467692}
   - {fileID: 160198960}
   - {fileID: 1770053795}
   - {fileID: 1230358476}
-  - {fileID: 0}
+  - {fileID: 44640959}
   - {fileID: 933947603}
   topNum: {fileID: 457928485}
   bottomNum: {fileID: 785465480}
@@ -2964,7 +2964,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 442395797}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 363936389}
+        m_TargetAssemblyTypeName: TradeScript, Assembly-CSharp
+        m_MethodName: increase
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &442395797
 MonoBehaviour:
   m_ObjectHideFlags: 0
