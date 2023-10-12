@@ -48,11 +48,19 @@ public class TradeScript : MonoBehaviour
 
     public static int[] Values = new int[] {5,5,5,5,5,5,5,5,25};
 
+
+    public void increase()
+    {
+        foreach (int item in Values)
+        {
+            Values[item] += 5;
+        }
+        ValuesInit();
+    }
+
     public void ValuesInit()
     {
         
-
-
         StockText[0].text = Values[0].ToString();
         StockText[1].text = Values[1].ToString();
         StockText[2].text = Values[2].ToString();
