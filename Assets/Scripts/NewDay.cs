@@ -6,8 +6,14 @@ using UnityEngine;
 
 public class NewDay : MonoBehaviour
 {
+    [SerializeField] TradeScript tradeScript;
+    [SerializeField] TradeControl tradeControl;
+
+
     [SerializeField] TMP_Text dayText;
     [SerializeField] TMP_Text dayTextMain;
+
+    [SerializeField] TMP_Text customersText;
 
     [SerializeField] GameObject CloudCardObj;
     [SerializeField] GameObject SunCardObj;
@@ -17,13 +23,14 @@ public class NewDay : MonoBehaviour
     [SerializeField] GameObject NoEventCardObj;
     [SerializeField] GameObject EventCardFlipedObj;
 
-    public int day = 0;
-    public float customers = 0f;
-    public bool raining = false;
-    public int lastEvent = 0;
+    public static int day = 0;
+    public static int customers = 0;
+    public static bool raining = false;
+    public static int lastEvent = 0;
 
     private void Start()
     {
+        tradeScript.ValuesInit();
         StartDay();
     }
 
@@ -42,19 +49,17 @@ public class NewDay : MonoBehaviour
             dayText.text = ("Day "+ day.ToString());
             dayTextMain.text = ("Day " + day.ToString());
 
-            customers = Random.Range(3f, 6f);
+            customers = Random.Range(3, 7);
             
             // Check for rain if yes divide customers by 2 if odd add 0.5
             if (raining)
             {
-                if (customers%2 == 0)
+                if (customers%2 != 0)
                 {
-                    customers = customers/2;
+                    customers++;
                 }
-                else
-                {
-                    customers = customers / 2 + 0.5f;
-                }
+                customers /= 2;
+                
 
                 RainCard();
                 BlankEventCard();
@@ -90,6 +95,11 @@ public class NewDay : MonoBehaviour
                 }
             }
 
+            // set remaining customers
+
+            customersText.text = customers.ToString();
+            tradeControl.NewCustomer();
+            
         }
 
     }
@@ -162,6 +172,13 @@ public class NewDay : MonoBehaviour
         CaravanCardObj.SetActive(false);
         NoEventCardObj.SetActive(false);
         EventCardFlipedObj.SetActive(true);
+    }
+
+
+    public int GetCustomers()
+    {
+        customers--;
+        return customers;
     }
 
 }
