@@ -82,12 +82,12 @@ public class TradeScript : MonoBehaviour
         StockText[6].text = Values[6].ToString();
         StockText[7].text = Values[7].ToString();
         StockText[8].text = Values[8].ToString();
-        StockText[8].text = Values[9].ToString();
-        StockText[8].text = Values[10].ToString();
-        StockText[8].text = Values[11].ToString();
-        StockText[8].text = Values[12].ToString();
-        StockText[8].text = Values[13].ToString();
-        StockText[8].text = Values[14].ToString();
+        StockText[9].text = Values[9].ToString();
+        StockText[10].text = Values[10].ToString();
+        StockText[11].text = Values[11].ToString();
+        StockText[12].text = Values[12].ToString();
+        StockText[13].text = Values[13].ToString();
+        StockText[14].text = Values[14].ToString();
 
     }
 
