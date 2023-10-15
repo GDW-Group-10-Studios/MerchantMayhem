@@ -14,6 +14,7 @@ public class NewDay : MonoBehaviour
     [SerializeField] TMP_Text dayTextMain;
 
     [SerializeField] TMP_Text customersText;
+    [SerializeField] TMP_Text suppliersText;
 
     [SerializeField] GameObject CloudCardObj;
     [SerializeField] GameObject SunCardObj;
@@ -25,15 +26,21 @@ public class NewDay : MonoBehaviour
 
     public static int day = 0;
     public static int customers = 0;
+    public static int suppliers = 0;
     public static bool raining = false;
     public static int lastEvent = 0;
 
     private void Start()
     {
-        tradeScript.ValuesInit();
+        tradeScript.ValuesRefresh();
         StartDay();
     }
 
+    public int GetSuppliers()
+    {
+        suppliers--;
+        return suppliers;
+    }
 
     public void StartDay()
     {
@@ -95,11 +102,16 @@ public class NewDay : MonoBehaviour
                 }
             }
 
-            // set remaining customers
 
             customersText.text = customers.ToString();
+
+            // Suppliers 2-4 per day
+
+            suppliers = Random.Range(2,5);
+            suppliersText.text = suppliers.ToString();
             tradeControl.NewCustomer();
             
+
         }
 
     }

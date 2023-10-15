@@ -15,32 +15,55 @@ public class TradeControl: MonoBehaviour
     [SerializeField] NewDay newDay;
 
     private int customers;
+    private int suppliers;
+    private int lastSupplier = -1;
+
+
+
 
     public void NewCustomer()
     {
-        customers = newDay.GetCustomers();
-
-        if (customers > 0)
+        suppliers = newDay.GetSuppliers();
+        if (suppliers >= 0)
         {
+            tradePanel.SetActive(false);
             nextCustomerButton.interactable = true;
             nextDayButton.SetActive(false);
-
-            customersText.text = customers.ToString();
-
-            tradePanel.SetActive(false);
-
-            tradeScript.RegularTrade();
+            if (lastSupplier < 7)
+            {
+                lastSupplier++;
+                tradeScript.NewSupplier(lastSupplier);
+            }
+            else
+            {
+                lastSupplier = 0;
+                tradeScript.NewSupplier(lastSupplier);
+            }
+            customersText.text = suppliers.ToString();
         }
-        else if (customers <= 0)
-        {
-            nextDayButton.SetActive(true);
-            nextCustomerButton.interactable = false;
+        else
+        { 
+            customers = newDay.GetCustomers();
+            if (customers > 0)
+            {
 
-            customersText.text = customers.ToString();
+                customersText.text = customers.ToString();
 
-            tradePanel.SetActive(false);
+                tradePanel.SetActive(false);
 
-            tradeScript.RegularTrade();
+                tradeScript.RegularTrade();
+            }
+            else if (customers <= 0)
+            {
+                nextDayButton.SetActive(true);
+                nextCustomerButton.interactable = false;
+
+                customersText.text = customers.ToString();
+
+                tradePanel.SetActive(false);
+
+                tradeScript.RegularTrade();
+            }
         }
     }
 

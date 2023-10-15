@@ -11,15 +11,17 @@ public class TradeScript : MonoBehaviour
     [SerializeField] Button Op1Button;
     [SerializeField] Button Op2Button;
 
-    [SerializeField] GameObject[] regularTradesOp1Left;
-    [SerializeField] GameObject[] regularTradesOp2Left;
-    [SerializeField] GameObject[] regularTradesOp1Right;
-    [SerializeField] GameObject[] regularTradesOp2Right;
+    [SerializeField] GameObject[] TradesOp1Left;
+    [SerializeField] GameObject[] TradesOp2Left;
+    [SerializeField] GameObject[] TradesOp1Right;
+    [SerializeField] GameObject[] TradesOp2Right;
 
     [SerializeField] TMP_Text TLNum;
     [SerializeField] TMP_Text TRNum;
     [SerializeField] TMP_Text BLNum;
     [SerializeField] TMP_Text BRNum;
+
+    [SerializeField] TMP_Text Name;
 
     [SerializeField] GameObject[] selectedTradeTop;
     [SerializeField] GameObject[] selectedTradeBottom;
@@ -46,19 +48,29 @@ public class TradeScript : MonoBehaviour
 
     public static int selectedOp;
 
-    public static int[] Values = new int[] {5,5,5,5,5,5,5,5,25};
+    public static int[] Values = new int[15] {5,5,5,5,5,5,5,5,25,0,0,0,0,0,0};
 
+    private string[] suppliersNames = new string[8] { "Farmer", "Miner", "Butcher", "Baker", "Brewer", "Jeweler", "Tanner", "BlackSmith" };
+    private int[] suppliersL1Cost = new int[8] { 1, 1, 1, 1, 1, 4, 3, 4};
+    private int[] suppliersL2Cost = new int[8] { 1, 1, 1, 3, 4, 0, 0, 4};
+    private int[] suppliersR1Cost = new int[8] { 1, 1, 1, 1, 1, 1, 1, 1};
+    private int[] suppliersR2Cost = new int[8] { 1, 1, 1, 1, 1, 0, 0, 1};
 
-    public void increase()
+    private int[] suppliersL1Item = new int[8] { 12, 12, 12, 8, 8, 10, 9, 11};
+    private int[] suppliersL2Item = new int[8] { 12, 12, 12, 8, 12, 10, 9, 11};
+    private int[] suppliersR1Item = new int[8] { 4, 6, 1, 0, 3, 12, 10, 14 };
+    private int[] suppliersR2Item = new int[8] { 2, 7, 5, 9, 13, 12, 10, 11 };
+
+    public void increase() // TEMP CHEAT CODE
     {
         for (int i = 0; i < Values.Length; i++)
         {
             Values[i] += 1;
         }
-        ValuesInit();
+        ValuesRefresh();
     }
 
-    public void ValuesInit()
+    public void ValuesRefresh()
     {
         
         StockText[0].text = Values[0].ToString();
@@ -70,27 +82,90 @@ public class TradeScript : MonoBehaviour
         StockText[6].text = Values[6].ToString();
         StockText[7].text = Values[7].ToString();
         StockText[8].text = Values[8].ToString();
+        StockText[8].text = Values[9].ToString();
+        StockText[8].text = Values[10].ToString();
+        StockText[8].text = Values[11].ToString();
+        StockText[8].text = Values[12].ToString();
+        StockText[8].text = Values[13].ToString();
+        StockText[8].text = Values[14].ToString();
 
     }
+
+
+    public void NewSupplier(int supplier)
+    {
+        Op1Button.interactable = true;
+        if (suppliersL2Cost[supplier] != 0)
+        {
+            Op2Button.interactable = true;
+        }
+        else 
+        { 
+            Op2Button.interactable = false; 
+        }
+        
+
+        foreach (GameObject Icon in TradesOp1Left)
+        {
+            Icon.SetActive(false);
+        }
+        foreach (GameObject Icon in TradesOp1Right)
+        {
+            Icon.SetActive(false);
+        }
+        foreach (GameObject Icon in TradesOp2Left)
+        {
+            Icon.SetActive(false);
+        }
+        foreach (GameObject Icon in TradesOp2Right)
+        {
+            Icon.SetActive(false);
+        }
+
+        tradeOp1 = suppliersL1Item[supplier];
+        tradeOp2 = suppliersL2Item[supplier];
+
+        tradeOp1Item = suppliersR1Item[supplier];
+        tradeOp1Cost = suppliersR1Cost[supplier];
+        tradeOp2Item = suppliersR2Item[supplier];
+        tradeOp2Cost = suppliersR2Cost[supplier];
+
+        tradeOp1Price = suppliersL1Cost[supplier];
+        tradeOp2Price = suppliersL2Cost[supplier];
+
+        TradesOp1Left[tradeOp1].SetActive(true);
+        TradesOp1Right[tradeOp1Item].SetActive(true);
+        TradesOp2Left[tradeOp2].SetActive(true);
+        TradesOp2Right[tradeOp2Item].SetActive(true);
+
+        TLNum.text = tradeOp1Price.ToString();
+        TRNum.text = tradeOp1Cost.ToString();
+
+        BLNum.text = tradeOp2Price.ToString();
+        BRNum.text = tradeOp2Cost.ToString();
+
+        Name.text = suppliersNames[supplier];
+    }
+
     public void RegularTrade()
     {
 
         Op1Button.interactable = true;
         Op2Button.interactable = true;
 
-        foreach (GameObject Icon in regularTradesOp1Left)
+        foreach (GameObject Icon in TradesOp1Left)
         {
             Icon.SetActive(false);
         }
-        foreach (GameObject Icon in regularTradesOp1Right)
+        foreach (GameObject Icon in TradesOp1Right)
         {
             Icon.SetActive(false);
         }
-        foreach (GameObject Icon in regularTradesOp2Left)
+        foreach (GameObject Icon in TradesOp2Left)
         {
             Icon.SetActive(false);
         }
-        foreach (GameObject Icon in regularTradesOp2Right)
+        foreach (GameObject Icon in TradesOp2Right)
         {
             Icon.SetActive(false);
         }
@@ -106,10 +181,10 @@ public class TradeScript : MonoBehaviour
         tradeOp1Price = 1;
         tradeOp2Price = 1;
 
-        regularTradesOp1Left[tradeOp1].SetActive(true);
-        regularTradesOp1Right[0].SetActive(true);
-        regularTradesOp2Left[tradeOp2].SetActive(true);
-        regularTradesOp2Right[0].SetActive(true);
+        TradesOp1Left[tradeOp1].SetActive(true);
+        TradesOp1Right[tradeOp1Item].SetActive(true);
+        TradesOp2Left[tradeOp2].SetActive(true);
+        TradesOp2Right[tradeOp2Item].SetActive(true);
 
         TLNum.text = tradeOp1Price.ToString();
         TRNum.text = tradeOp1Cost.ToString();
@@ -117,6 +192,7 @@ public class TradeScript : MonoBehaviour
         BLNum.text = tradeOp2Price.ToString();
         BRNum.text = tradeOp2Cost.ToString();
 
+        Name.text = "Villager";
     }
 
     public void SelectTradeOp1()
