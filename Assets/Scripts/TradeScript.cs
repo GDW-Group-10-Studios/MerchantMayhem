@@ -12,6 +12,9 @@ public class TradeScript : MonoBehaviour
     [SerializeField] GameObject Warning;
     [SerializeField] TMP_Text WarningText;
 
+    [SerializeField] GameObject infuText;
+    [SerializeField] GameObject cheat;
+
     [SerializeField] NewDay newDay;
 
     [SerializeField] TMP_Text[] StockText;
@@ -62,7 +65,7 @@ public class TradeScript : MonoBehaviour
     public static int customer;
     public static int customertype;
 
-    public static int[] Values = new int[15] {5,5,5,5,5,5,5,5,25,0,0,0,0,0,0};
+    public static int[] Values = new int[15] {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
 
     private string[] suppliersNames = new string[8] { "Farmer", "Miner", "Butcher", "Baker", "Brewer", "Jeweler", "Tanner", "BlackSmith" };
     private string[] specialNames = new string[] { "Grandma", "Time traveler", "Wizard", "Warrior", "Wanderer", "Assassin", "Rich Guy", "Influencer", "Delinquent", "Robber" };
@@ -91,6 +94,34 @@ public class TradeScript : MonoBehaviour
     private int[] specialR2Item = new int[10] {8,8,8,8,8,8,8,8,8,8};
 
 
+    public void initValues()
+    {
+        for (int i = 0; i < 9; i++)
+        {
+            if (i < 4)
+            {
+                Values[i] = Random.Range(4, 9);
+            }
+            else if (i < 8)
+            {
+                Values[i] = Random.Range(2, 6);
+            }
+            else if (i == 8)
+            {
+                Values[8] = Random.Range(5, 50);
+            }
+        }
+
+        if (Random.Range(0, 2) == 0)
+        {
+            Values[Random.Range(9, 15)]++;
+        }
+        Values[Random.Range(9, 15)]++;
+
+        ValuesRefresh();
+        newDay.StartDay();
+    }
+
     public void increase() // TEMP CHEAT CODE
     {
         for (int i = 0; i < Values.Length; i++)
@@ -98,6 +129,11 @@ public class TradeScript : MonoBehaviour
             Values[i] += 1;
         }
         ValuesRefresh();
+    }
+
+    public void Cheat()
+    {
+        cheat.SetActive(true);
     }
 
     public void ValuesRefresh()
@@ -135,7 +171,6 @@ public class TradeScript : MonoBehaviour
 
     public void NewSpecial(int specialCustomer)
     {
-
         foreach (GameObject Icon in Art)
         {
             Icon.SetActive(false);
@@ -391,6 +426,7 @@ public class TradeScript : MonoBehaviour
 
     public void RegularTrade()
     {
+
         Warning.SetActive(false);
         WarningText.text = "";
         customertype = 0;

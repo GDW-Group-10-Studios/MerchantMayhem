@@ -6,6 +6,8 @@ using UnityEngine;
 
 public class NewDay : MonoBehaviour
 {
+    [SerializeField] GameObject infuText;
+
     [SerializeField] GameObject win;
     [SerializeField] GameObject loseRent;
     [SerializeField] GameObject LoseAssassin;
@@ -38,11 +40,7 @@ public class NewDay : MonoBehaviour
     public static bool raining = false;
     public static int lastEvent = 0;
 
-    private void Start()
-    {
-        tradeScript.ValuesRefresh();
-        StartDay();
-    }
+   
 
     public int GetSuppliers()
     {
@@ -146,8 +144,12 @@ public class NewDay : MonoBehaviour
 
             if (extraCustomers)
             {
-                customers *= 2;
+                customers *= 2; infuText.SetActive(true);
                 extraCustomers = false;
+            }
+            else
+            {
+                infuText.SetActive(false);
             }
             customersText.text = customers.ToString();
             // Suppliers 2-4 per day
@@ -192,6 +194,8 @@ public class NewDay : MonoBehaviour
     public void Infuencer()
     {
         extraCustomers = true;
+        infuText.SetActive(true);
+
     }
 
     public void Assassin()

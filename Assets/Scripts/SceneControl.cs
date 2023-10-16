@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 
 public class SceneControl : MonoBehaviour
 {
+    [SerializeField] TradeScript tradeScript;
     public GameObject main;
     public GameObject rules;
     public GameObject credits;
@@ -61,6 +62,13 @@ public class SceneControl : MonoBehaviour
     {
         main.SetActive(true);
         endOfDay.SetActive(false);
+    }
+    public void DayStart()
+    {
+        mainMenu.SetActive(false);
+        main.SetActive(false);
+        endOfDay.SetActive(true);
+        tradeScript.initValues();
     }
 
 }
