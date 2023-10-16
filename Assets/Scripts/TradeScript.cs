@@ -16,6 +16,8 @@ public class TradeScript : MonoBehaviour
 
     [SerializeField] TMP_Text[] StockText;
 
+    [SerializeField] GameObject[] Art;
+
     [SerializeField] Button Op1Button;
     [SerializeField] Button Op2Button;
 
@@ -63,7 +65,7 @@ public class TradeScript : MonoBehaviour
     public static int[] Values = new int[15] {5,5,5,5,5,5,5,5,25,0,0,0,0,0,0};
 
     private string[] suppliersNames = new string[8] { "Farmer", "Miner", "Butcher", "Baker", "Brewer", "Jeweler", "Tanner", "BlackSmith" };
-    private string[] specialNames = new string[] { "Grandma", "Time traveler", "Wizard", "Warrior", "Wanderer", "Assassin", "Lord", "Influencer", "Delinquent", "Robber" };
+    private string[] specialNames = new string[] { "Grandma", "Time traveler", "Wizard", "Warrior", "Wanderer", "Assassin", "Rich Guy", "Influencer", "Delinquent", "Robber" };
     private string[] specialText = new string[] { "50% Chance Of Doubling Customers On Next Day", "50% chance Of Being Arrested On Next Day", "Repair Damage Caused"};
     // identifier for non normal trades: 1 regular item trip price. 2 double customers next day. 3 Force Trade. 4 50/50 lose game.
     private int[] special = new int[] { 0,0,0,0,0,4,1,2,3,3};
@@ -133,7 +135,14 @@ public class TradeScript : MonoBehaviour
 
     public void NewSpecial(int specialCustomer)
     {
-        
+
+        foreach (GameObject Icon in Art)
+        {
+            Icon.SetActive(false);
+        }
+
+        Art[specialCustomer + 10].SetActive(true);
+
         customer = specialCustomer;
         customertype = 1;
   
@@ -178,6 +187,7 @@ public class TradeScript : MonoBehaviour
             {
                 Icon.SetActive(false);
             }
+            
 
             tradeOp1 = Random.Range(13, 19);
             tradeOp2 = tradeOp1;
@@ -347,6 +357,12 @@ public class TradeScript : MonoBehaviour
         {
             Icon.SetActive(false);
         }
+        foreach (GameObject Icon in Art)
+        {
+            Icon.SetActive(false);
+        }
+
+        Art[supplier + 2].SetActive(true);
 
         tradeOp1 = suppliersL1Item[supplier];
         tradeOp2 = suppliersL2Item[supplier];
@@ -398,6 +414,12 @@ public class TradeScript : MonoBehaviour
         {
             Icon.SetActive(false);
         }
+        foreach (GameObject Icon in Art)
+        {
+            Icon.SetActive(false);
+        }
+
+        Art[Random.Range(0, 2)].SetActive(true);
 
         tradeOp1 = Random.Range(0, 12);
         tradeOp2 = Random.Range(0, 12);
