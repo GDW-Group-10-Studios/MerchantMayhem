@@ -6,6 +6,12 @@ using UnityEngine;
 
 public class NewDay : MonoBehaviour
 {
+    [SerializeField] GameObject win;
+    [SerializeField] GameObject loseRent;
+    [SerializeField] GameObject LoseAssassin;
+
+
+    [SerializeField] SceneControl sceneControl;
     [SerializeField] TradeScript tradeScript;
     [SerializeField] TradeControl tradeControl;
 
@@ -24,6 +30,8 @@ public class NewDay : MonoBehaviour
     [SerializeField] GameObject NoEventCardObj;
     [SerializeField] GameObject EventCardFlipedObj;
 
+    public static bool extraCustomers = false;
+    public static bool gameOver = false;
     public static int day = 0;
     public static int customers = 0;
     public static int suppliers = 0;
@@ -42,12 +50,45 @@ public class NewDay : MonoBehaviour
         return suppliers;
     }
 
+    public void GameWin()
+    {
+        win.SetActive(true);
+        loseRent.SetActive(false);
+        LoseAssassin.SetActive(false);
+    }
+    public void GameLose(int reason)
+    {
+        if (reason == 0)
+        {
+            win.SetActive(false);
+            loseRent.SetActive(true);
+            LoseAssassin.SetActive(false);
+        }
+        else if (reason == 1)
+        {
+            win.SetActive(false);
+            LoseAssassin.SetActive(true);
+        }
+    }
+
     public void StartDay()
     {
         // Check if end of month
-        if (day >= 30)
+        if (day >= 30 || gameOver)
         {
-            // Call Game End Func In Future
+            sceneControl.End();
+            if (gameOver)
+            {
+                GameLose(1);
+            }
+            if (tradeScript.RentCheck())
+            {
+                GameWin();
+            }
+            else
+            {
+                GameLose(0);
+            }
         }
         else
         {
@@ -103,8 +144,12 @@ public class NewDay : MonoBehaviour
             }
 
 
+            if (extraCustomers)
+            {
+                customers *= 2;
+                extraCustomers = false;
+            }
             customersText.text = customers.ToString();
-
             // Suppliers 2-4 per day
 
             suppliers = Random.Range(2,5);
@@ -142,6 +187,16 @@ public class NewDay : MonoBehaviour
         {
             return false;
         }
+    }
+
+    public void Infuencer()
+    {
+        extraCustomers = true;
+    }
+
+    public void Assassin()
+    {
+        gameOver = true;
     }
 
     // Weather Card Functions

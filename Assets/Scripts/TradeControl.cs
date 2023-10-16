@@ -50,8 +50,14 @@ public class TradeControl: MonoBehaviour
                 customersText.text = customers.ToString();
 
                 tradePanel.SetActive(false);
-
-                tradeScript.RegularTrade();
+                if (Random.Range(0,4) == 0)
+                {
+                    tradeScript.NewSpecial(Random.Range(0, 10));
+                }
+                else
+                {
+                    tradeScript.RegularTrade();
+                }
             }
             else if (customers <= 0)
             {
